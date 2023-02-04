@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 @Getter
 @Setter
@@ -19,4 +20,10 @@ public class Inscription implements Serializable {
     @GeneratedValue
     Long numInscription;
     Integer numSemaine;
+
+    @ManyToOne
+    Cours cours;
+    @ManyToOne
+    Skieur skieur ;
+
 }

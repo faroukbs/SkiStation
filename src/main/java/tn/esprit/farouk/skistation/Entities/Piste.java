@@ -3,10 +3,10 @@ package tn.esprit.farouk.skistation.Entities;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
+
 @Getter
 @Setter
 @ToString
@@ -19,8 +19,12 @@ public class Piste implements Serializable {
     @GeneratedValue
     Long numPiste;
     String nomPiste;
+    @Enumerated(EnumType.STRING)
     Couleur couleur;
     Integer longeur;
     Integer Pente;
+    @ManyToMany(mappedBy = "pistes",cascade = CascadeType.REMOVE)
+    Set<Skieur>skieurs;
+
 
 }

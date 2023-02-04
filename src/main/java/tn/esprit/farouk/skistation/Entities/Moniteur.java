@@ -3,11 +3,12 @@ package tn.esprit.farouk.skistation.Entities;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.Set;
+
 @Getter
 @Setter
 @ToString
@@ -21,6 +22,11 @@ public class Moniteur implements Serializable {
     Long numMonitor;
     String nomM;
     String prenomM;
-    LocalDate dateRecru ;
+    @Temporal(TemporalType.DATE)
+    Date dateRecru ;
+
+    @OneToMany
+    Set<Cours> cours;
+
 
 }

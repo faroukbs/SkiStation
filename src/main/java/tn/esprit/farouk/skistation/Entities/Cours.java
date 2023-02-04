@@ -3,10 +3,10 @@ package tn.esprit.farouk.skistation.Entities;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
+
 @Getter
 @Setter
 @ToString
@@ -19,8 +19,13 @@ public class Cours implements Serializable {
     @GeneratedValue
     Long numCours;
     Integer niveau;
+    @Enumerated(EnumType.STRING)
     TypeCours typeCours;
+    @Enumerated(EnumType.STRING)
     Support support;
     Float Prix;
     Integer creneau;
+    @OneToMany(mappedBy = "cours" ,cascade = CascadeType.REMOVE)
+    Set<Inscription>inscriptions;
+
 }

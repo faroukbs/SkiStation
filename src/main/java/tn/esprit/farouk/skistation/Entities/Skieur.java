@@ -3,11 +3,12 @@ package tn.esprit.farouk.skistation.Entities;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.Set;
+
 @Getter
 @Setter
 @ToString
@@ -17,11 +18,17 @@ import java.time.LocalDate;
 @Entity
 public class Skieur implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long numSkieur;
     String nomS;
     String prenomS;
-    LocalDate dateNaissance;
+    @Temporal(TemporalType.DATE)
+    Date dateNaissance;
     String ville;
-
+    @OneToOne
+    Abonnement abonnement;
+    @ManyToMany
+    Set<Piste>pistes;
+    @OneToMany(mappedBy = "skieur" , cascade = CascadeType.REMOVE)
+    Set<Inscription>inscriptions;
 }

@@ -2,13 +2,10 @@ package tn.esprit.farouk.skistation.Entities;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -21,10 +18,14 @@ public class Abonnement implements Serializable {
     @Id
     @GeneratedValue
     Long numAbon;
-    LocalDate dateDebut;
-    LocalDate dateFin;
+    @Temporal(TemporalType.DATE)
+    Date dateDebut;
+    @Temporal(TemporalType.DATE)
+    Date dateFin;
     Float prixAbon;
+    @Enumerated(EnumType.STRING)
     TypeAbonnement typeAbonnement;
+
 
 
 
