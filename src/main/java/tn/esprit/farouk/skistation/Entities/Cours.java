@@ -16,7 +16,7 @@ import java.util.Set;
 @Entity
 public class Cours implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long numCours;
     Integer niveau;
     @Enumerated(EnumType.STRING)

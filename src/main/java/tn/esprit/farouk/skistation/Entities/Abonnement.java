@@ -4,7 +4,6 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -16,7 +15,7 @@ import java.util.Date;
 @Entity
 public class Abonnement implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long numAbon;
     @Temporal(TemporalType.DATE)
     Date dateDebut;

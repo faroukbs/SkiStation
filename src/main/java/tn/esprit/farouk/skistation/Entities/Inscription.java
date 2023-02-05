@@ -3,10 +3,7 @@ package tn.esprit.farouk.skistation.Entities;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 @Getter
 @Setter
@@ -17,7 +14,7 @@ import java.io.Serializable;
 @Entity
 public class Inscription implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long numInscription;
     Integer numSemaine;
 
