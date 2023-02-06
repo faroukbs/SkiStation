@@ -13,7 +13,7 @@ public class AbonnementServiceImpl implements IAbonnementService {
     private AbonnementRepo abonnementRepo;
 
     @Override
-    public List<Abonnement> retrieveAllCourses() {
+    public List<Abonnement> retrieveAllAbonnements() {
         return abonnementRepo.findAll();
     }
 

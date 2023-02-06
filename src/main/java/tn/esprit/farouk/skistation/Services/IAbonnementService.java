@@ -6,7 +6,7 @@ import tn.esprit.farouk.skistation.Entities.Cours;
 import java.util.List;
 
 public interface IAbonnementService {
-    List<Abonnement> retrieveAllCourses();
+    List<Abonnement> retrieveAllAbonnements();
     Abonnement addAbonnement(Abonnement abonnement);
     Abonnement updateAbonnement (Abonnement abonnement);
     Abonnement retrieveAbonnement(Long numAbonnement);
