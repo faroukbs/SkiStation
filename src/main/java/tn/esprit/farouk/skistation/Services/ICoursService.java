@@ -9,4 +9,5 @@ public interface ICoursService {
     Cours addCours(Cours cours);
     Cours updateCours (Cours cours);
     Cours retrieveCours (Long numCours);
+    void remove(Long id);
 }

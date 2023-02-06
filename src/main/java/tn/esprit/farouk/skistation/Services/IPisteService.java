@@ -9,4 +9,5 @@ public interface IPisteService {
     Piste addPiste(Piste piste);
     Piste updatePiste (Piste piste);
     Piste retrievePiste (Long numPiste);
+    void remove(Long id);
 }

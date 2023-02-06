@@ -3,29 +3,37 @@ package tn.esprit.farouk.skistation.Services;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.farouk.skistation.Entities.Cours;
+import tn.esprit.farouk.skistation.Repositories.CoursRepo;
 
 import java.util.List;
 
 @AllArgsConstructor
 @Service
 public class CoursServiceimpl implements ICoursService {
+    private CoursRepo coursRepo;
     @Override
     public List<Cours> retrieveAllCourses() {
-        return null;
+        return coursRepo.findAll();
     }
 
     @Override
     public Cours addCours(Cours cours) {
-        return null;
+        return coursRepo.save(cours);
     }
 
     @Override
     public Cours updateCours(Cours cours) {
-        return null;
+        return coursRepo.save(cours);
     }
 
     @Override
     public Cours retrieveCours(Long numCours) {
-        return null;
+        return coursRepo.findById(numCours).orElse(null);
+    }
+
+    @Override
+    public void remove(Long id) {
+        coursRepo.deleteById(id);
+
     }
 }

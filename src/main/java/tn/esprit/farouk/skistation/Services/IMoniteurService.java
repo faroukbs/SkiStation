@@ -9,4 +9,5 @@ public interface IMoniteurService {
     Moniteur addMoniteur(Moniteur moniteur);
     Moniteur updateMoniteur (Moniteur moniteur);
     Moniteur retrieveMoniteur (Long numMoniteur);
+    void remove(Long id);
 }

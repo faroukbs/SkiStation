@@ -5,6 +5,7 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -21,8 +22,8 @@ public class Skieur implements Serializable {
     Long numSkieur;
     String nomS;
     String prenomS;
-    @Temporal(TemporalType.DATE)
-    Date dateNaissance;
+
+    LocalDate dateNaissance;
     String ville;
     @OneToOne
     Abonnement abonnement;
