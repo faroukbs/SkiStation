@@ -36,4 +36,12 @@ public class SkieurController {
     @DeleteMapping("/delete/{id}")
     public void Delete(@PathVariable("id")Long id){ iskieurService.removeSkieur(id);
     }
+    @PutMapping("/{numSkieur}/{numPiste}")
+    Skieur assignSkierToPiste(@PathVariable Long numSkieur, @PathVariable Long numPiste) {
+        return iskieurService.assignSkierToPiste(numSkieur, numPiste);
+    }
+    @PutMapping("/rest/{numSkieur}/{numAbon}")
+    Skieur assignSkierToAbonnement(@PathVariable Long numSkieur, @PathVariable Long numAbon) {
+        return iskieurService.assignSkierToAbonnement(numSkieur, numAbon);
+    }
 }
