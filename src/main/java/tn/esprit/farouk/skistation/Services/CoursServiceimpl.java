@@ -3,6 +3,7 @@ package tn.esprit.farouk.skistation.Services;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.farouk.skistation.Entities.Cours;
+import tn.esprit.farouk.skistation.Entities.Support;
 import tn.esprit.farouk.skistation.Repositories.CoursRepo;
 
 import java.util.List;
@@ -35,5 +36,10 @@ public class CoursServiceimpl implements ICoursService {
     public void remove(Long id) {
         coursRepo.deleteById(id);
 
+    }
+
+    @Override
+    public List<Integer> numWeeksCourseOfInstructorBySupport(Long numInstructor, Support support) {
+        return null;
     }
 }
