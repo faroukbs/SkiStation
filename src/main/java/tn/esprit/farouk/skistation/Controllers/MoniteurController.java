@@ -4,10 +4,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.farouk.skistation.Entities.Cours;
+import tn.esprit.farouk.skistation.Entities.Inscription;
 import tn.esprit.farouk.skistation.Entities.Moniteur;
+import tn.esprit.farouk.skistation.Entities.Support;
 import tn.esprit.farouk.skistation.Services.IMoniteurService;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -46,4 +49,10 @@ public class MoniteurController {
 
        return iMoniteurService.addInstructorAndAssignToCourse(moniteur,numCourse);
     }
+    @GetMapping("numweek/{numInstructor}/{support}")
+    public List<Integer> numWeeksCourseOfInstructorBySupport(@PathVariable Long numInstructor,@PathVariable Support support) {
+        return iMoniteurService.numWeeksCourseOfInstructorBySupport(numInstructor,support);
+    }
+
+
 }

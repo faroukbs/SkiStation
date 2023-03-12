@@ -2,6 +2,7 @@ package tn.esprit.farouk.skistation.Services;
 
 import tn.esprit.farouk.skistation.Entities.Moniteur;
 import tn.esprit.farouk.skistation.Entities.Skieur;
+import tn.esprit.farouk.skistation.Entities.Support;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface IMoniteurService {
     Moniteur retrieveMoniteur (Long numMoniteur);
     void remove(Long id);
     Moniteur addInstructorAndAssignToCourse(Moniteur moniteur, Long numCourse);
+
+    List<Integer> numWeeksCourseOfInstructorBySupport(Long numInstructor, Support support);
 }

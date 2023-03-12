@@ -4,10 +4,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import tn.esprit.farouk.skistation.Entities.Cours;
+import tn.esprit.farouk.skistation.Entities.Inscription;
 import tn.esprit.farouk.skistation.Entities.Moniteur;
+import tn.esprit.farouk.skistation.Entities.Support;
 import tn.esprit.farouk.skistation.Repositories.CoursRepo;
 import tn.esprit.farouk.skistation.Repositories.MoniteurRepo;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,6 +56,21 @@ public class MoniteurServiceimpl implements IMoniteurService{
         Assert.notNull(course, "course not found");
 
         return moniteurRepo.save(moniteur);
+    }
+
+    @Override
+    public List<Integer> numWeeksCourseOfInstructorBySupport(Long numInstructor, Support support) {
+        List<Integer> numSemaines = new ArrayList<>();
+       Moniteur m = moniteurRepo.findByNumMonitorAndCoursSupport(numInstructor,support);
+        System.out.println(m);
+
+        for (Cours c : m.getCours()){
+
+            for (Inscription ins : c.getInscriptions()){
+                numSemaines.add(ins.getNumSemaine());
+            }
+        }
+        return numSemaines;
     }
 
 

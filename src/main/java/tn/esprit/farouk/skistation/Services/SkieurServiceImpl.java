@@ -1,6 +1,8 @@
 package tn.esprit.farouk.skistation.Services;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import tn.esprit.farouk.skistation.Entities.*;
@@ -8,11 +10,13 @@ import tn.esprit.farouk.skistation.Repositories.*;
 
 import javax.transaction.Transactional;
 import java.beans.Transient;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
 @Service
+@Slf4j
 public class SkieurServiceImpl implements IskieurService {
 
     private SkieurRepo skieurRepo;
@@ -95,5 +99,15 @@ public class SkieurServiceImpl implements IskieurService {
     @Override
     public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement) {
         return skieurRepo.findByAbonnementTypeAbonnement(typeAbonnement);
+    }
+
+    @Override
+    @Scheduled(cron = "*/30 * * * * *" )
+    public void retrieveSubscriptions() {
+        List<Skieur> sk =  skieurRepo.findByAbonnementDateFinGreaterThan(LocalDate.now().plusDays(7));
+        for (Skieur s : sk){
+            //System.out.println(s);
+            log.info(s.getAbonnement().getNumAbon() + s.getNumSkieur()+s.getNomS()+s.getPrenomS());
+        }
     }
 }

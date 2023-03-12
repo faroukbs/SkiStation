@@ -38,8 +38,5 @@ public class CoursServiceimpl implements ICoursService {
 
     }
 
-    @Override
-    public List<Integer> numWeeksCourseOfInstructorBySupport(Long numInstructor, Support support) {
-        return null;
-    }
+
 }

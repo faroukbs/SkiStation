@@ -10,7 +10,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -20,7 +19,6 @@ public class Inscription implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long numInscription;
     Integer numSemaine;
-
     @ManyToOne
     Cours cours;
     @ManyToOne

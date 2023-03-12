@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import tn.esprit.farouk.skistation.Entities.Skieur;
 import tn.esprit.farouk.skistation.Entities.TypeAbonnement;
 
+import java.time.LocalDate;
 import java.util.List;
 @Repository
 public interface SkieurRepo  extends JpaRepository<Skieur,Long> {
@@ -12,6 +13,8 @@ public interface SkieurRepo  extends JpaRepository<Skieur,Long> {
     List<Skieur>findByAbonnementNumAbon(Long numabon);
 
     List<Skieur> findByAbonnementTypeAbonnement(TypeAbonnement typeAbonnement);
+
+    List<Skieur> findByAbonnementDateFinGreaterThan(LocalDate dateFin);
 
 
 

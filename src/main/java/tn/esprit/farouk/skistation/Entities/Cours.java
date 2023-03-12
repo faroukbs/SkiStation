@@ -11,7 +11,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -29,6 +28,6 @@ public class Cours implements Serializable {
     Integer creneau;
     @OneToMany(mappedBy = "cours" ,cascade = CascadeType.ALL)
     @JsonIgnore
-    Set<Inscription>inscriptions;
+    Set<Inscription> inscriptions;
 
 }

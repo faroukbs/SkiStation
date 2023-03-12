@@ -11,5 +11,5 @@ public interface ICoursService {
     Cours updateCours (Cours cours);
     Cours retrieveCours (Long numCours);
     void remove(Long id);
-    List<Integer> numWeeksCourseOfInstructorBySupport(Long numInstructor, Support support);
+
 }

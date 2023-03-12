@@ -21,6 +21,7 @@ public interface IskieurService {
 
     Skieur addSkierAndAssignToCourse(Skieur skieur);
     List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement);
+    void retrieveSubscriptions();
 
 
 
