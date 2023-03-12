@@ -25,8 +25,9 @@ public class Moniteur implements Serializable {
 
     LocalDate dateRecru ;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     Set<Cours> cours;
+
 
 
 }

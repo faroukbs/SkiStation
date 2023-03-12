@@ -1,7 +1,9 @@
 package tn.esprit.farouk.skistation.Controllers;
 
 import lombok.AllArgsConstructor;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.farouk.skistation.Entities.Cours;
 import tn.esprit.farouk.skistation.Entities.Moniteur;
 import tn.esprit.farouk.skistation.Services.IMoniteurService;
 
@@ -37,5 +39,11 @@ public class MoniteurController {
 
     @DeleteMapping("/delete/{id}")
     public void Delete(@PathVariable("id")Long id){ iMoniteurService.remove(id);
+    }
+
+    @PostMapping("addmoniteurtocourse/{numCourse}")
+    public Moniteur addInstructorAndAssignToCourse(@RequestBody Moniteur moniteur,@PathVariable Long numCourse) {
+
+       return iMoniteurService.addInstructorAndAssignToCourse(moniteur,numCourse);
     }
 }

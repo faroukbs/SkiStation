@@ -9,4 +9,5 @@ import java.util.List;
 public interface MoniteurRepo extends JpaRepository<Moniteur,Long> {
 
 
+
 }

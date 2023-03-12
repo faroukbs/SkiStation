@@ -3,6 +3,7 @@ package tn.esprit.farouk.skistation.Controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.farouk.skistation.Entities.Skieur;
+import tn.esprit.farouk.skistation.Entities.TypeAbonnement;
 import tn.esprit.farouk.skistation.Services.IskieurService;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @RequestMapping("/skieur")
 public class SkieurController {
     private IskieurService iskieurService;
+
 
     @PostMapping("/add")
     public Skieur addSkieur(@RequestBody Skieur s) {
@@ -44,4 +46,15 @@ public class SkieurController {
     Skieur assignSkierToAbonnement(@PathVariable Long numSkieur, @PathVariable Long numAbon) {
         return iskieurService.assignSkierToAbonnement(numSkieur, numAbon);
     }
+
+    @PostMapping("/skieurabin")
+    public Skieur addSkierAndAssignToCourse(@RequestBody Skieur skieur) {
+
+        return iskieurService.addSkierAndAssignToCourse(skieur);
+    }
+    @GetMapping("skieurByTypeAbon/{typeAbonnement}")
+    public List<Skieur> retrieveSkiersBySubscriptionType(@PathVariable TypeAbonnement typeAbonnement){
+        return iskieurService.retrieveSkiersBySubscriptionType(typeAbonnement);
+    }
+
 }

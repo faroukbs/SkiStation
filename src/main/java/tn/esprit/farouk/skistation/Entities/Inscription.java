@@ -1,5 +1,8 @@
 package tn.esprit.farouk.skistation.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -21,6 +24,7 @@ public class Inscription implements Serializable {
     @ManyToOne
     Cours cours;
     @ManyToOne
+    @JsonBackReference
     Skieur skieur ;
 
 }

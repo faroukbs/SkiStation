@@ -11,4 +11,5 @@ public interface IInscriptionService {
     Inscription updateInscription(Inscription inscription);
     Inscription retrieveInscription (Long numCours);
     void remove(Long id);
+    Inscription addRegistrationAndAssignToSkierAndCourse(Inscription inscription, Long numSkieur, Long numCours);
 }

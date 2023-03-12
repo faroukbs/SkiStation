@@ -1,5 +1,8 @@
 package tn.esprit.farouk.skistation.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -25,10 +28,12 @@ public class Skieur implements Serializable {
 
     LocalDate dateNaissance;
     String ville;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     Abonnement abonnement;
     @ManyToMany
-    Set<Piste>pistes;
-    @OneToMany(mappedBy = "skieur" , cascade = CascadeType.REMOVE)
-    Set<Inscription>inscriptions;
+    @JsonIgnore
+    Set<Piste> pistes;
+    @OneToMany(mappedBy = "skieur", cascade = CascadeType.PERSIST)
+    @JsonManagedReference
+    Set<Inscription> inscriptions;
 }

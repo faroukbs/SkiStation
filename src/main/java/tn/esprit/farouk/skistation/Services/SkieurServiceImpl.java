@@ -3,14 +3,13 @@ package tn.esprit.farouk.skistation.Services;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import tn.esprit.farouk.skistation.Entities.Abonnement;
-import tn.esprit.farouk.skistation.Entities.Piste;
-import tn.esprit.farouk.skistation.Entities.Skieur;
-import tn.esprit.farouk.skistation.Repositories.AbonnementRepo;
-import tn.esprit.farouk.skistation.Repositories.PisteRepo;
-import tn.esprit.farouk.skistation.Repositories.SkieurRepo;
+import tn.esprit.farouk.skistation.Entities.*;
+import tn.esprit.farouk.skistation.Repositories.*;
 
+import javax.transaction.Transactional;
+import java.beans.Transient;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @Service
@@ -19,6 +18,9 @@ public class SkieurServiceImpl implements IskieurService {
     private SkieurRepo skieurRepo;
     private PisteRepo pisteRepo;
     private AbonnementRepo abonnementRepo;
+    private InscriptionRepo inscriptionRepo;
+
+    private CoursRepo coursRepo;
 
     @Override
     public Skieur addSkieur(Skieur s) {
@@ -55,7 +57,7 @@ public class SkieurServiceImpl implements IskieurService {
         Piste piste = pisteRepo.findById(numPiste).orElse(null);
         //verifier if piste not null
         Assert.notNull(piste, "piste not found");
-        //traitement n7eb nchouf les objets  ljebthom w nzidhom l9dima w ba3ed l9dima m3a jdid n7otou f ligne lekher "skieur.setPistes(pistes);"
+        // n7eb nchouf les objets  ljebthom w nzidhom l9dima w ba3ed l9dima m3a jdid n7otou f ligne lekher "skieur.setPistes(pistes);"
    /* Set<Piste> pistes = skieur.getPistes();
     pistes.add(piste);
     skieur.setPistes(pistes);
@@ -73,5 +75,25 @@ public class SkieurServiceImpl implements IskieurService {
         Assert.notNull(abonnement, "abonnement not found");
         skieur.setAbonnement(abonnement);
         return skieurRepo.save(skieur);
+    }
+
+    @Override
+    @Transactional
+    public Skieur addSkierAndAssignToCourse(Skieur skieur) {
+
+        abonnementRepo.save(skieur.getAbonnement());
+        for (Inscription i : skieur.getInscriptions()){
+            Cours c = coursRepo.findById(i.getCours().getNumCours()).orElse(null);
+            i.setCours(c);
+        }
+        inscriptionRepo.saveAll(skieur.getInscriptions());
+
+
+        return skieurRepo.save(skieur);
+    }
+
+    @Override
+    public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement) {
+        return skieurRepo.findByAbonnementTypeAbonnement(typeAbonnement);
     }
 }

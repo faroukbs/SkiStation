@@ -1,5 +1,7 @@
 package tn.esprit.farouk.skistation.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -25,7 +27,8 @@ public class Cours implements Serializable {
     Support support;
     Float Prix;
     Integer creneau;
-    @OneToMany(mappedBy = "cours" ,cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "cours" ,cascade = CascadeType.ALL)
+    @JsonIgnore
     Set<Inscription>inscriptions;
 
 }
