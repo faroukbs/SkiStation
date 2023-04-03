@@ -21,9 +21,7 @@ public class Moniteur implements Serializable {
     Long numMonitor;
     String nomM;
     String prenomM;
-
     LocalDate dateRecru ;
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     Set<Cours> cours;
 

@@ -28,12 +28,17 @@ public class SkieurServiceImpl implements IskieurService {
 
     @Override
     public Skieur addSkieur(Skieur s) {
+        Abonnement abonad = s.getAbonnement();
+        Abonnement addedabon = abonnementRepo.save(abonad);
+        Skieur addedski = skieurRepo.save(s);
+        addedski.setAbonnement(addedabon);
         return skieurRepo.save(s);
     }
 
 
     @Override
     public void removeSkieur(Long id) {
+
         skieurRepo.deleteById(id);
     }
 

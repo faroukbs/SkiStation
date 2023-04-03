@@ -1,6 +1,8 @@
 package tn.esprit.farouk.skistation.Services;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.farouk.skistation.Entities.Abonnement;
 import tn.esprit.farouk.skistation.Entities.TypeAbonnement;
@@ -12,6 +14,7 @@ import java.util.Set;
 
 @AllArgsConstructor
 @Service
+@Slf4j
 public class AbonnementServiceImpl implements IAbonnementService {
     private AbonnementRepo abonnementRepo;
 
@@ -49,5 +52,15 @@ public class AbonnementServiceImpl implements IAbonnementService {
     @Override
     public List<Abonnement> retrieveSubscriptionsByDates(LocalDate startDate, LocalDate endDate) {
         return abonnementRepo.findByDateDebutBetween(startDate,endDate);
+    }
+
+    @Override
+    @Scheduled(cron = "*/30 * * * * *" )
+    public void showMonthlyRecurringRevenue() {
+        float sum;
+      List<Abonnement> ab= abonnementRepo.findByPrixAbonAndTypeAbonnement_Mensuel();
+      for (Abonnement a : ab){
+          sum=a.getPrixAbon();
+      }
     }
 }

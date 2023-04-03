@@ -25,7 +25,6 @@ public class Skieur implements Serializable {
     Long numSkieur;
     String nomS;
     String prenomS;
-
     LocalDate dateNaissance;
     String ville;
     @OneToOne(cascade = CascadeType.PERSIST)
