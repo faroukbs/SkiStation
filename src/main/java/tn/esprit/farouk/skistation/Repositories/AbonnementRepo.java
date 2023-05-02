@@ -15,5 +15,6 @@ public interface AbonnementRepo extends JpaRepository <Abonnement,Long> {
     Set<Abonnement> findByTypeAbonnementOrderByDateDebut(TypeAbonnement type);
     List<Abonnement> findByDateDebutBetween(LocalDate startDate, LocalDate endDate);
 
-    List<Abonnement>findByPrixAbonAndTypeAbonnement_Mensuel();
+   // List<Abonnement>findByPrixAbonAndTypeAbonnement_Mensuel();
+
 }

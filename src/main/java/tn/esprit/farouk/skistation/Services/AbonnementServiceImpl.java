@@ -1,7 +1,9 @@
 package tn.esprit.farouk.skistation.Services;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.XSlf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.farouk.skistation.Entities.Abonnement;
@@ -12,14 +14,18 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 @Slf4j
 public class AbonnementServiceImpl implements IAbonnementService {
-    private AbonnementRepo abonnementRepo;
+    private final AbonnementRepo abonnementRepo;
 
     @Override
     public List<Abonnement> retrieveAllAbonnements() {
+
+        log.info("in method : retrieveAllAbonnements" );
+        log.info("out method : retrieveAllAbonnements " );
+
         return abonnementRepo.findAll();
     }
 
@@ -51,16 +57,17 @@ public class AbonnementServiceImpl implements IAbonnementService {
 
     @Override
     public List<Abonnement> retrieveSubscriptionsByDates(LocalDate startDate, LocalDate endDate) {
-        return abonnementRepo.findByDateDebutBetween(startDate,endDate);
+        return abonnementRepo.findByDateDebutBetween(startDate, endDate);
     }
 
-    @Override
-    @Scheduled(cron = "*/30 * * * * *" )
-    public void showMonthlyRecurringRevenue() {
+   /* @Override
+    @Scheduled(cron = "*//*30 * * * * *" )
+
+    /*public void showMonthlyRecurringRevenue() {
         float sum;
       List<Abonnement> ab= abonnementRepo.findByPrixAbonAndTypeAbonnement_Mensuel();
       for (Abonnement a : ab){
           sum=a.getPrixAbon();
       }
-    }
+    }*/
 }

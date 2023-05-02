@@ -27,37 +27,37 @@ public class InscriptionServiceImpl implements IInscriptionService {
 
     @Override
     public Inscription addInscription(Inscription cours) {
-        return null;
+        return inscriptionRepo.save(cours);
     }
 
     @Override
     public Inscription updateInscription(Inscription cours) {
-        return null;
+        return inscriptionRepo.save(cours);
     }
 
 
     @Override
     public Inscription retrieveInscription(Long numCours) {
-        return null;
+        return inscriptionRepo.findById(numCours).orElse(null);
     }
 
     @Override
     public void remove(Long id) {
-
+        inscriptionRepo.deleteById(id);
     }
 
     @Override
     public Inscription addRegistrationAndAssignToSkierAndCourse(Inscription inscription, Long numSkieur, Long numCours) {
         Cours c = coursRepo.findById(numCours).orElse(null);
         Skieur skieur = skieurRepo.findById(numSkieur).orElse(null);
-        int conteur = 0;
+        int compteur = 0;
         for (Inscription i : c.getInscriptions()) {
             if (i.getSkieur() != null) {
-                conteur++;
+                compteur++;
             }
         }
-        if (conteur < 6) {
-            long years = java.time.temporal.ChronoUnit.YEARS.between( skieur.getDateNaissance(),LocalDate.now());
+        if (compteur < 6) {
+            long years = java.time.temporal.ChronoUnit.YEARS.between(skieur.getDateNaissance(), LocalDate.now());
             System.out.println(years);
             if (years < 18) {
                 if (c.getTypeCours() == TypeCours.COLLECTIF_ENFANT) {
@@ -70,9 +70,7 @@ public class InscriptionServiceImpl implements IInscriptionService {
                     inscription.setSkieur(skieur);
                 }
             }
-
         }
-
         return inscriptionRepo.save(inscription);
     }
 }

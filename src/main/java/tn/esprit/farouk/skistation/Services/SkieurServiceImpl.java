@@ -89,15 +89,15 @@ public class SkieurServiceImpl implements IskieurService {
     @Override
     @Transactional
     public Skieur addSkierAndAssignToCourse(Skieur skieur) {
-
+        Assert.notNull(skieur.getAbonnement(), "Must be subscribed");
+        Assert.notNull(skieur.getInscriptions(), "Must be Inscripted");
+        skieur.getInscriptions().forEach(inscription -> Assert.notNull(inscription.getCours().getNumCours(), "inscription must have a course "));
         abonnementRepo.save(skieur.getAbonnement());
-        for (Inscription i : skieur.getInscriptions()){
+        for (Inscription i : skieur.getInscriptions()) {
             Cours c = coursRepo.findById(i.getCours().getNumCours()).orElse(null);
             i.setCours(c);
         }
         inscriptionRepo.saveAll(skieur.getInscriptions());
-
-
         return skieurRepo.save(skieur);
     }
 
@@ -107,12 +107,12 @@ public class SkieurServiceImpl implements IskieurService {
     }
 
     @Override
-    @Scheduled(cron = "*/30 * * * * *" )
+    @Scheduled(cron = "*/30 * * * * *")
     public void retrieveSubscriptions() {
-        List<Skieur> sk =  skieurRepo.findByAbonnementDateFinGreaterThan(LocalDate.now().plusDays(7));
-        for (Skieur s : sk){
+        List<Skieur> sk = skieurRepo.findByAbonnementDateFinGreaterThan(LocalDate.now().plusDays(7));
+        for (Skieur s : sk) {
             //System.out.println(s);
-            log.info(s.getAbonnement().getNumAbon() + s.getNumSkieur()+s.getNomS()+s.getPrenomS());
+            log.info(s.getAbonnement().getNumAbon() + s.getNumSkieur() + s.getNomS() + s.getPrenomS());
         }
     }
 }

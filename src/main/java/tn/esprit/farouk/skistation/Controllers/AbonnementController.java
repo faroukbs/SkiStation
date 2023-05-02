@@ -1,6 +1,7 @@
 package tn.esprit.farouk.skistation.Controllers;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.farouk.skistation.Entities.Abonnement;
@@ -12,9 +13,9 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AbonnementController {
-    private IAbonnementService iAbonnementService;
+    private final IAbonnementService iAbonnementService;
 
     @PostMapping("/add")
     public Abonnement add(@RequestBody Abonnement p) {
